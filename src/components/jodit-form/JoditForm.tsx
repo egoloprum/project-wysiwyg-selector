@@ -1,7 +1,12 @@
 "use client"
 
 import { useState } from "react"
-import { Jodit } from "../jodit-editor"
+import dynamic from "next/dynamic"
+
+const Jodit = dynamic(() => import("../jodit-editor").then(mod => mod.Jodit), {
+  ssr: false,
+  loading: () => <p>Loading editor...</p>
+})
 
 export const JoditForm = ({}) => {
   const [content, setContent] = useState("")
